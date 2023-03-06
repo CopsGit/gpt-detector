@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import {useState} from "react";
+import Link from "next/link";
 
 export default function Home() {
     const [input, setInput] = useState("");
@@ -108,19 +109,30 @@ export default function Home() {
             `}>Detect
                     </button>
                     <p className={`
-                text-lg font-bold mt-3 
+                text-xl font-bold mt-3 
                 ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}
-            `}>Result: {result.Class} AI-generated</p>
-                    <div className="flex justify-between w-full mb-1 items-center">
-                        <span className={`text-base font-medium ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}`}>AI-Generated Probability</span>
-                        <span className={`text-sm font-medium ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}`}>{result['AI-Generated Probability']?.toFixed(2)}%</span>
+            `}>Result: {
+                        result.Class ? `${result.Class} AI-generated` : 'No result yet'
+                    }</p>
+                    <div className="flex justify-between w-full mt-5 items-center">
+                        <span className={`text-lg font-medium ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}`}>AI-Generated Probability</span>
+                        <span className={`text-lg font-medium ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}`}>{result['AI-Generated Probability']?.toFixed(2) || 0}%</span>
                     </div>
-                    <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                    <div className="w-full bg-gray-200 rounded-full h-5 dark:bg-gray-700">
                         <div
-                            className={`h-2.5 rounded-full ${result.Class === 'very unlikely' ? "bg-green-500" : result.Class === 'unlikely' ? "bg-green-500" : result.Class === 'unclear if it is' ? "bg-yellow-500" : result.Class === 'possibly' ? "bg-yellow-500" : result.Class === 'likely' ? "bg-red-500" : "bg-gray-700"}`}
+                            className={`h-5 rounded-full ${result.Class === 'very unlikely' ? "bg-green-500" : result.Class === 'unlikely' ? "bg-green-500" : result.Class === 'unclear if it is' ? "bg-yellow-500" : result.Class === 'possibly' ? "bg-yellow-500" : result.Class === 'likely' ? "bg-red-500" : "bg-gray-700"}`}
                             style={{width: `${result['AI-Generated Probability']?.toFixed(2)}%`}}></div>
                     </div>
                 </div>
+                <h1>
+                    GitHub:
+                    <Link className={`
+                text-blue-500 hover:text-blue-700 font-semibold
+                transition duration-200 ease-in-out transform hover:-translate-y-1 hover:scale-110
+                    `} href="https://github.com/CopsGit/gpt-detector" target="_blank">
+                        CopsGit/gpt-detector
+                    </Link>
+                </h1>
             </main>
         </>
     )
