@@ -86,7 +86,7 @@ export default function Home() {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <main
-                className={`flex flex-col items-center justify-center h-screen w-screen bg-gray-100 p-3 overflow-y-auto`}>
+                className={`flex flex-col items-center justify-center h-screen w-screen bg-gray-100 p-6 overflow-y-auto`}>
                     <textarea
                         placeholder="Enter text to detect"
                         rows={10}
@@ -100,7 +100,7 @@ export default function Home() {
                     />
                 <div className={`
             flex flex-col items-center justify-center
-            h-1/2 w-screen p-3 overflow-y-auto bg-gray-100
+            h-1/2 w-1/2 p-3 overflow-y-auto bg-gray-100
         `}>
                     <button onClick={detect} className={`
                 bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded
@@ -111,10 +111,15 @@ export default function Home() {
                 text-lg font-bold mt-3 
                 ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}
             `}>Result: {result.Class} AI-generated</p>
-                    <p className={`
-                text-lg font-bold mt-3
-                ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}
-            `}>AI-Generated Probability: {result['AI-Generated Probability']?.toFixed(2)}%</p>
+                    <div className="flex justify-between w-full mb-1 items-center">
+                        <span className={`text-base font-medium ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}`}>AI-Generated Probability</span>
+                        <span className={`text-sm font-medium ${result.Class === 'very unlikely' ? "text-green-500" : result.Class === 'unlikely' ? "text-green-500" : result.Class === 'unclear if it is' ? "text-yellow-500" : result.Class === 'possibly' ? "text-yellow-500" : result.Class === 'likely' ? "text-red-500" : "text-gray-700"}`}>{result['AI-Generated Probability']?.toFixed(2)}%</span>
+                    </div>
+                    <div className="w-full bg-gray-200 rounded-full h-2.5 dark:bg-gray-700">
+                        <div
+                            className={`h-2.5 rounded-full ${result.Class === 'very unlikely' ? "bg-green-500" : result.Class === 'unlikely' ? "bg-green-500" : result.Class === 'unclear if it is' ? "bg-yellow-500" : result.Class === 'possibly' ? "bg-yellow-500" : result.Class === 'likely' ? "bg-red-500" : "bg-gray-700"}`}
+                            style={{width: `${result['AI-Generated Probability']?.toFixed(2)}%`}}></div>
+                    </div>
                 </div>
             </main>
         </>
